@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
- "scripts": {
+  "scripts": {
     "start": "node index.js",
     "lint": "npx eslint .",
     "build": "rm -rf ./node_modules && npm install",
     "wdio": "wdio run ./wdio.conf.js"
-}
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -32,3 +32,4 @@
     "wdio-intercept-service": "4.0.0"
   }
 }
+
