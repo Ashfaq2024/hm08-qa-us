@@ -20,4 +20,23 @@ describe('Create an order', () => {
         await expect(await helper.getElementByText(phoneNumber)).toBeExisting();
     })
 })
+test('TC009 - Login with empty username and password', async () => {
+    const response = await login('', '');
+    expect(response.message).toBe("Username and password cannot be empty");
+});
+
+test('TC010 - Login with maximum length password', async () => {
+    const longPassword = 'A'.repeat(255); // Example maximum length
+    const response = await login('validUsername', longPassword);
+    expect(response.message).toBe("Login successful");
+});
+
+test('TC011 - Multiple login attempts with invalid credentials', async () => {
+    for (let i = 0; i < 3; i++) {
+        const response = await login('validUsername', 'invalidPassword');
+        expect(response.message).toBe("Invalid credentials");
+    }
+    const lockoutResponse = await login('validUsername', 'invalidPassword');
+    expect(lockoutResponse.message).toBe("Account temporarily locked");
+});
 
